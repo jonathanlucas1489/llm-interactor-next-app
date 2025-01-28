@@ -4,7 +4,7 @@ import { Stack, Typography, Button, Box, TextField } from "@mui/material";
 import { useState } from "react";
 
 export default function Home() {
-  // const [file, setFile] = useState<File | null>(null);
+  const [_, setFile] = useState<File | null>(null);
   const [responseText, setResponseText] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
