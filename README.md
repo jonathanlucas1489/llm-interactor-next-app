@@ -1,10 +1,10 @@
 # Frontend Readme
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
-
 ## Project Overview
 
-This project is the frontend of our application, built with Next.js to provide a modern, scalable, and performant user interface. The application leverages server-side rendering, optimized static assets, and dynamic routing for an enhanced user experience.
+This project is the frontend of the application LLM INTERACTOR made by Jonathan Lucas. Its a tool that you can use to upload documents to a webpage, get the extracted
+text (OCR) and request interactive explanations over the extracted data (LLM).
+
 
 ## Getting Started
 
