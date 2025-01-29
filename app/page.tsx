@@ -54,7 +54,6 @@ export default function Home() {
             <PastDocumentsList selectedDocument={selectedDocument} setSelectedDocument={setSelectedDocument}  setMessages={setMessages} />
             <MainInteractorInterface selectedDocument={selectedDocument} setSelectedDocument={setSelectedDocument} messages={messages} setMessages={setMessages} />
           </Stack>
-          <Button sx={{ml: 4}} variant="contained" color="error" onClick={handleLogout}>Logout</Button>
         </Box>
       ) : (
         <>
@@ -64,6 +63,7 @@ export default function Home() {
           <Signup onLogin={(newToken) => setToken(newToken)} />
         </>
       )}
+      <Button sx={{ml: 4}} variant="contained" color="error" onClick={handleLogout}>Logout</Button>
     </Stack>
   );
 }

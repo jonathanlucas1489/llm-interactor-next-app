@@ -39,8 +39,12 @@ export default function MainInteractorInterface({ selectedDocument, setSelectedD
 
   const onSuccess = async (res: any) => {
     const imageUrl = res.url;
-    await uploadDocument(imageUrl, setMessages);
-    setIsCurrentInChat(true)
+    try {
+      await uploadDocument(imageUrl, setMessages);
+      setIsCurrentInChat(true)
+    } catch (e) {
+      console.log("Error uploading image")
+    }
   };
 
   const onResetChat = async () => {
