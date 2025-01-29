@@ -14,7 +14,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Image LLM Interactor",
+  title: "Jonathan Lucas - PAGGO OCR CASE",
   description: 	"You can upload image with text and ask questions about it",
 };
 

@@ -5,6 +5,8 @@ export const useAskQuestion = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const askQuestion = async (question: string, setMessages: any) => {
+    const documentId = localStorage.getItem("documentId")
+
     setMessages((prevMessages: any[]) => [
       ...prevMessages,
       { text: question, isUser: true },
@@ -15,7 +17,7 @@ export const useAskQuestion = () => {
       const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}documents/generate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: question }),
+        body: JSON.stringify({ prompt: question, documentId }),
       });
 
       if (!response.ok) throw new Error("Failed to process the question.");

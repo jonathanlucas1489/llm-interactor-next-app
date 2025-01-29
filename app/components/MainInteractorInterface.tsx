@@ -2,13 +2,21 @@
 'use client';
 
 import { useState } from "react";
-import { Stack, Typography, Box, Divider, CircularProgress } from "@mui/material";
+import { Stack, Typography, Box, Divider, CircularProgress, Button } from "@mui/material";
 import { ImageKitProvider } from "imagekitio-next";
 import UploadComponent from "./UploadComponent";
 import ResponseComponent from "./ReponseComponent";
 import QuestionForm from "./QuestionForm";
 import { useAskQuestion } from "../hooks/useAskQuestion";
 import { useUpload } from "../hooks/useUpload";
+
+interface MainInteractorInterfaceProps {
+  selectedDocument: string | null;
+  setSelectedDocument: (id: string | null) => void;
+  messages: { text: string; isUser: boolean }[];
+  setMessages: (messages: { text: string; isUser: boolean }[]) => void;
+}
+
 
 const authenticator = async () => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_OWN_API_URL}api/auth`);
@@ -18,12 +26,11 @@ const authenticator = async () => {
   return response.json();
 };
 
-export default function MainInteractorInterface() {
-  const [messages, setMessages] = useState<{ text: string; isUser: boolean }[]>([]);
+export default function MainInteractorInterface({ selectedDocument, setSelectedDocument, messages, setMessages}: MainInteractorInterfaceProps) {
   const { isLoading, uploadDocument } = useUpload();
-  const { askQuestion, isLoading: isLoadingAskQuestion } = useAskQuestion();
+  const [isCurrentInChat, setIsCurrentInChat ] = useState<boolean>(false);
 
-  console.log(messages)
+  const { askQuestion, isLoading: isLoadingAskQuestion } = useAskQuestion();
 
   const onError = (err: any) => {
     console.error("Error uploading file", err);
@@ -33,20 +40,26 @@ export default function MainInteractorInterface() {
   const onSuccess = async (res: any) => {
     const imageUrl = res.url;
     await uploadDocument(imageUrl, setMessages);
+    setIsCurrentInChat(true)
   };
 
+  const onResetChat = async () => {
+    setMessages([]);
+    setIsCurrentInChat(false)
+    setSelectedDocument(null)
+  };
 
   const onAsk = async (question: string) => {
     await askQuestion(question, setMessages);
   };
 
   return (
-    <Stack spacing={4} justifyContent="center" alignItems="center" bgcolor="black" p={4}>
-      <Box textAlign="center" width="100%" maxWidth="500px">
+    <Stack spacing={4} alignItems="center" bgcolor="black" p={4}>
+      {isCurrentInChat || selectedDocument ? <Button sx={{ml: 4}} variant="contained" color="info" onClick={onResetChat}>New Chat</Button> : null}
+      {!isCurrentInChat && !selectedDocument ? <Box textAlign="center" width="100%" minWidth="1500px">
         <Typography color="white" variant="h6" mb={2}>
           Select and Upload Your Document
         </Typography>
-
         <ImageKitProvider publicKey={process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY} urlEndpoint={process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT} authenticator={authenticator}>
           <UploadComponent
             onSuccess={onSuccess}
@@ -54,7 +67,7 @@ export default function MainInteractorInterface() {
             isLoading={isLoading}
           />
         </ImageKitProvider>
-      </Box>
+      </Box> : null}
 
       <Box width="100%">
         <Stack spacing={2}>
@@ -69,7 +82,7 @@ export default function MainInteractorInterface() {
       </Box>
       <Divider sx={{backgroundColor: "gray"}}/>
       {isLoadingAskQuestion ? <CircularProgress/> : null}
-      <QuestionForm onAsk={onAsk} disabled={!(messages.length > 0 && !isLoadingAskQuestion)} />
+      {isCurrentInChat ? <QuestionForm onAsk={onAsk} disabled={!(messages.length > 0 && !isLoadingAskQuestion)} /> : null}
     </Stack>
   );
 }

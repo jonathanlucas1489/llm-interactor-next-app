@@ -18,7 +18,7 @@ const QuestionForm = ({ onAsk, disabled }: QuestionFormProps) => {
   };
 
   return (
-    <Box textAlign="center" mt={4} width="100%">
+    <Box textAlign="center" mt={4} width="100%" maxWidth="1500px">
       <form onSubmit={handleSubmit}>
         <TextField
           disabled={disabled}

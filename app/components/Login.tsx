@@ -15,6 +15,7 @@ export default function Login({ onLogin }: LoginProps) {
     const response = await login(email, password);
     if (response) {
       localStorage.setItem("token", response.token);
+      localStorage.setItem("userId", response.userId);
       onLogin(response.token);
     }
   };

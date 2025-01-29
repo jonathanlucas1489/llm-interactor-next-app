@@ -13,7 +13,7 @@ const UploadComponent = ({ onSuccess, onError, isLoading }: UploadProps) => (
   <Box
     textAlign="center"
     width="100%"
-    maxWidth="500px"
+    minWidth="1000px"
     display="flex"
     flexDirection="column"
     justifyContent="center"
