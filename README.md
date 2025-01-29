@@ -1,10 +1,15 @@
 # Frontend Readme
 
-## Project Overview
+Este é o frontend do sistema de OCR desenvolvido para o case técnico da **Paggo**. A aplicação permite que usuários façam upload de imagens de documentos, obtenham o texto extraído via OCR e interajam com um modelo de linguagem (LLM) para obter explicações sobre os dados extraídos.  
 
-This project is the frontend of the application LLM INTERACTOR made by Jonathan Lucas. Its a tool that you can use to upload documents to a webpage, get the extracted
-text (OCR) and request interactive explanations over the extracted data (LLM).
-
+## 🚀 Funcionalidades  
+✔ Upload de documentos (imagens)  
+✔ Extração de texto via OCR  
+✔ Interação com IA para perguntas sobre os dados extraídos  
+✔ Listagem de documentos enviados  
+✔ Exibição das interações com a IA  
+✔ Download do documento processado com texto extraído  
+✔ Autenticação de usuários  
 
 ## Getting Started
 
