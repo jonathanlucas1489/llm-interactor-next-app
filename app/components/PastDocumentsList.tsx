@@ -21,7 +21,6 @@ export default function PastDocumentsList({ selectedDocument, setSelectedDocumen
   }, []);
 
   if (isLoading) return <Typography color="white">Loading...</Typography>;
-
   if (error) return <Typography color="red">{error}</Typography>;
 
   return (
