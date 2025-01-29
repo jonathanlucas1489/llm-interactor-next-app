@@ -26,6 +26,10 @@ export default function Home() {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("documentId");
+    setSelectedDocument(null);
+    setMessages([]);
     setToken(null);
   };
 
