@@ -43,7 +43,7 @@ export default function MainInteractorInterface({ selectedDocument, setSelectedD
       await uploadDocument(imageUrl, setMessages);
       setIsCurrentInChat(true)
     } catch (e) {
-      console.log("Error uploading image")
+      console.log("Error uploading image", e)
     }
   };
 
