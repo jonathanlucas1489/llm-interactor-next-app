@@ -15,6 +15,8 @@ export default function Signup({ onLogin }: SignupProps) {
     const response = await signup(email, password);
     if (response) {
       localStorage.setItem("token", response.token);
+      localStorage.setItem("userId", "");
+      localStorage.setItem("documentId", "");
       onLogin(response.token);
     }
   };

@@ -16,6 +16,7 @@ export default function Login({ onLogin }: LoginProps) {
     if (response) {
       localStorage.setItem("token", response.token);
       localStorage.setItem("userId", response.userId);
+      localStorage.setItem("documentId", "");
       onLogin(response.token);
     }
   };
