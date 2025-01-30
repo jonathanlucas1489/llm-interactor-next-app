@@ -9,8 +9,8 @@ const imagekit = new ImageKit({
 
 export async function GET() {
   try {
-    const authParams = imagekit.getAuthenticationParameters(undefined, 3400); 
-    console.log("authParams", authParams)
+    const expireTimestamp = Math.floor(Date.now() / 1000) + 3400;
+    const authParams = imagekit.getAuthenticationParameters(undefined, expireTimestamp);
     return NextResponse.json(authParams, {
       headers: {
         'Cache-Control': 'no-store', 
