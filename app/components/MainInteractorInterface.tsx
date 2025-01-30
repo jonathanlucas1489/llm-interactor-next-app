@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-import { Stack, Typography, Box, Divider, CircularProgress, Button } from "@mui/material";
+import { Stack, Typography, Box, Divider, CircularProgress, Button, Alert } from "@mui/material";
 import { ImageKitProvider } from "imagekitio-next";
 import UploadComponent from "./UploadComponent";
 import ResponseComponent from "./ReponseComponent";
@@ -37,7 +37,6 @@ export default function MainInteractorInterface({ isCurrentInChat, setIsCurrentI
   const { askQuestion, isLoading: isLoadingAskQuestion, error } = useAskQuestion();
 
   const onError = (err: any) => {
-    console.error("Error uploading file", err);
     alert("There was an error uploading the file. Please try again.");
   };
 
@@ -64,7 +63,7 @@ export default function MainInteractorInterface({ isCurrentInChat, setIsCurrentI
 
   return (
     <Stack spacing={4} alignItems="center" bgcolor="black" p={4}>
-
+      {error && <Alert variant="filled" severity="error">Houve um problema ao gerar sua resposta. Tente novamente</Alert>}
       {isCurrentInChat || selectedDocument ? <Button sx={{ ml: 4 }} variant="contained" color="info" onClick={onResetChat}>New Chat</Button> : null}
       {selectedDocument && (
         <PDFDownloadLink
