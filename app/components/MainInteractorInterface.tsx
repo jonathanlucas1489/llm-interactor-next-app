@@ -11,6 +11,7 @@ import { useUpload } from "../hooks/useUpload";
 import { PDFDownloadLink } from "@react-pdf/renderer";
 import PdfDocument from "./PdfCreator";
 import { DocumentProps } from "../page";
+import { useCallback } from "react";
 
 interface MainInteractorInterfaceProps {
   selectedDocument: DocumentProps | null;
@@ -23,18 +24,24 @@ interface MainInteractorInterfaceProps {
 }
 
 
-const authenticator = async () => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_OWN_API_URL}api/auth`);
-  if (!response.ok) {
-    throw new Error("Authentication failed");
-  }
-  return response.json();
-};
-
 export default function MainInteractorInterface({ isCurrentInChat, setIsCurrentInChat, selectedDocument, setSelectedDocument, messages, setMessages, getDocuments }: MainInteractorInterfaceProps) {
   const { isLoading, uploadDocument } = useUpload();
 
   const { askQuestion, isLoading: isLoadingAskQuestion, error } = useAskQuestion();
+
+  const authenticator = useCallback(async () => {
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_OWN_API_URL}api/auth`);
+      if (!response.ok) {
+        throw new Error("Authentication failed");
+      }
+      const newAuthParams = await response.json();
+      return newAuthParams;
+    } catch (error) {
+      console.error("Error fetching auth params:", error);
+      throw new Error("Authentication failed");
+    }
+  }, []);
 
   const onError = (err: any) => {
     console.log(err)
