@@ -3,6 +3,7 @@ import { useState } from "react";
 
 export const useAskQuestion = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const askQuestion = async (question: string, setMessages: any) => {
     const documentId = localStorage.getItem("documentId")
@@ -34,5 +35,5 @@ export const useAskQuestion = () => {
     }
   };
 
-  return { isLoading, askQuestion };
+  return { isLoading, askQuestion, error };
 };

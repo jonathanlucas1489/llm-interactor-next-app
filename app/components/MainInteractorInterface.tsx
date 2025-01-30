@@ -34,7 +34,7 @@ const authenticator = async () => {
 export default function MainInteractorInterface({ isCurrentInChat, setIsCurrentInChat, selectedDocument, setSelectedDocument, messages, setMessages, getDocuments }: MainInteractorInterfaceProps) {
   const { isLoading, uploadDocument } = useUpload();
 
-  const { askQuestion, isLoading: isLoadingAskQuestion } = useAskQuestion();
+  const { askQuestion, isLoading: isLoadingAskQuestion, error } = useAskQuestion();
 
   const onError = (err: any) => {
     console.error("Error uploading file", err);

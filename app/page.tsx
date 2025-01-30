@@ -72,8 +72,9 @@ export default function Home() {
               isCurrentInChat={isCurrentInChat}
               setIsCurrentInChat={setIsCurrentInChat}
             />
+            
           </Stack>
-          <Button sx={{ml: 4}} variant="contained" color="error" onClick={handleLogout}>Logout</Button>
+          <Button sx={{mt: 4}} variant="contained" fullWidth color="error" onClick={handleLogout}>Logout</Button>
         </Box>
       ) : (
         <>
