@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-import { useState } from "react";
 import { Stack, Typography, Box, Divider, CircularProgress, Button } from "@mui/material";
 import { ImageKitProvider } from "imagekitio-next";
 import UploadComponent from "./UploadComponent";
