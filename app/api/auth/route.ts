@@ -9,7 +9,8 @@ const imagekit = new ImageKit({
 
 export async function GET() {
   try {
-    const authParams = imagekit.getAuthenticationParameters(undefined, 1738734069);
+    const timestamp = Math.floor(Date.now() / 1000) + 500; 
+    const authParams = imagekit.getAuthenticationParameters(undefined, timestamp);
     
     return NextResponse.json(authParams);
   } catch (error) {

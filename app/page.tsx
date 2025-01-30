@@ -42,7 +42,7 @@ export default function Home() {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        backgroundColor: "black",
+        backgroundColor: "#606060",
         minHeight: "100vh",
         width: "100vw", 
         position: "relative",
