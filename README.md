@@ -11,6 +11,14 @@ Este é o frontend do sistema de OCR desenvolvido para o case técnico da **Pagg
 ✔ Autenticação de usuários  
 ✔ Download dos documentos com as interações anexadas
 
+
+[screen-capture (3).webm](https://github.com/user-attachments/assets/57b7c8b6-3b7f-4f84-8d94-787777fba838)
+
+
+PDF Downloaded from interaction with the original document appended:
+
+![image](https://github.com/user-attachments/assets/7a99174a-bdf0-4d8e-b1c6-7a7537ad1d96)
+
 ## Getting Started
 
 ### Prerequisites
