@@ -31,7 +31,7 @@ export default function MainInteractorInterface({ isCurrentInChat, setIsCurrentI
 
   const authenticator = useCallback(async () => {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_OWN_API_URL}api/auth`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_OWN_API_URL}api/auth`, { cache: 'no-store', next: { revalidate: 0 }});
       if (!response.ok) {
         throw new Error("Authentication failed");
       }
