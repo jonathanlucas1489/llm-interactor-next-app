@@ -9,6 +9,7 @@ Este é o frontend do sistema de OCR desenvolvido para o case técnico da **Pagg
 ✔ Listagem de documentos enviados  
 ✔ Exibição das interações com a IA  
 ✔ Autenticação de usuários  
+✔ Download dos documentos com as interações anexadas
 
 ## Getting Started
 
