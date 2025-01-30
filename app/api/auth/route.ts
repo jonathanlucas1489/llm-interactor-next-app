@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import ImageKit from "imagekit";
 import { NextResponse } from "next/server";
 
@@ -9,8 +10,7 @@ const imagekit = new ImageKit({
 
 export async function GET() {
   try {
-    const expire = Math.floor(Date.now() / 1000) + 60;
-
+    const expire = dayjs().subtract(2, 'hour').unix();
     const authParams = imagekit.getAuthenticationParameters(undefined, expire); 
     return NextResponse.json(authParams);
   } catch (error) {
