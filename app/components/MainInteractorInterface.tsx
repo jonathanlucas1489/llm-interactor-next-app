@@ -74,7 +74,6 @@ export default function MainInteractorInterface({ isCurrentInChat, setIsCurrentI
           />
         </ImageKitProvider>
       </Box> : null}
-
       <Box width="100%">
         <Stack spacing={2}>
           {messages.map((message, index) => (
