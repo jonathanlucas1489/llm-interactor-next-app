@@ -2,6 +2,7 @@
 import { IKUpload } from "imagekitio-next";
 import { Box, CircularProgress, IconButton } from "@mui/material";
 import UploadIcon from "@mui/icons-material/Upload";
+import { v4 as uuidv4 } from "uuid";
 
 interface UploadProps {
   onSuccess: (res: any) => void;
@@ -37,7 +38,7 @@ const UploadComponent = ({ onSuccess, onError, isLoading }: UploadProps) => (
       <UploadIcon fontSize="inherit" sx={{ color: "black" }} />
     </IconButton>
       <IKUpload
-        fileName="test-upload.png"
+        fileName={`document-${uuidv4()}`}
         onError={onError}
         onSuccess={onSuccess}
       /></>}
