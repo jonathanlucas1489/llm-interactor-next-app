@@ -1,21 +1,28 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import { useEffect } from "react";
 import { Box, Typography, List, ListItem, ListItemText } from "@mui/material";
 import Image from "next/image";
-import { useGetDocuments } from "../hooks/useGetDocuments";
 
 interface PastDocumentsListProps {
   selectedDocument: string | null;
   setSelectedDocument: (id: string) => void;
   setMessages: (messages: { text: string; isUser: boolean }[]) => void;
+  isLoading: boolean;
+  documents: any[];
+  error: string | null;
+  getDocuments: () => void;
 }
 
-export default function PastDocumentsList({ selectedDocument, setSelectedDocument, setMessages }: PastDocumentsListProps) {
-  const { isLoading, documents, error, getDocuments } = useGetDocuments();
-
+export default function PastDocumentsList({ 
+  selectedDocument, 
+  setSelectedDocument, 
+  setMessages, 
+  isLoading, 
+  documents, 
+  error, 
+  getDocuments 
+}: PastDocumentsListProps) {
   useEffect(() => {
     getDocuments();
   }, []);
@@ -47,7 +54,7 @@ export default function PastDocumentsList({ selectedDocument, setSelectedDocumen
               border: selectedDocument === document.id ? "1px solid #00bcd4" : "1px solid white",
             }}
             onClick={() => {
-              setSelectedDocument(document.id)
+              setSelectedDocument(document.id);
               const interactions = document.interactions.map((interaction: { content: string; isFromUser: boolean; }) => ({
                 text: interaction.content,
                 isUser: interaction.isFromUser,

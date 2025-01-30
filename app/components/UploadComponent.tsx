@@ -23,7 +23,7 @@ const UploadComponent = ({ onSuccess, onError, isLoading }: UploadProps) => (
     p={4}
     boxShadow={3}
   >
-    <IconButton
+    {!isLoading && <><IconButton
       sx={{
         fontSize: 100,
         color: "primary.main",
@@ -34,13 +34,13 @@ const UploadComponent = ({ onSuccess, onError, isLoading }: UploadProps) => (
       }}
       aria-label="upload"
     >
-      <UploadIcon fontSize="inherit" sx={{color:"black"}} />
+      <UploadIcon fontSize="inherit" sx={{ color: "black" }} />
     </IconButton>
-    <IKUpload
-      fileName="test-upload.png"
-      onError={onError}
-      onSuccess={onSuccess}
-    />
+      <IKUpload
+        fileName="test-upload.png"
+        onError={onError}
+        onSuccess={onSuccess}
+      /></>}
     {isLoading && <CircularProgress color="primary" />}
   </Box>
 );

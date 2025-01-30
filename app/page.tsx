@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import MainInteractorInterface from "./components/MainInteractorInterface";
 import PastDocumentsList from "./components/PastDocumentsList";
+import { useGetDocuments } from "./hooks/useGetDocuments";
 
 export interface DocumentInteraction {
   content: string;
@@ -19,6 +20,8 @@ export default function Home() {
   const [token, setToken] = useState<string | null>(null);
   const [selectedDocument, setSelectedDocument] = useState<string | null>(null);
   const [messages, setMessages] = useState<{ text: string; isUser: boolean }[]>([]);
+
+  const { isLoading, documents, error, getDocuments } = useGetDocuments();
 
   useEffect(() => {
     setToken(localStorage.getItem("token"));
@@ -49,21 +52,34 @@ export default function Home() {
     >
       <Typography variant="h1" color="white" textAlign="center" mb={8}>Paggo - OCR Case</Typography>
       {token ? (
-        <Box >
+        <Box>
           <Stack direction="row">
-            <PastDocumentsList selectedDocument={selectedDocument} setSelectedDocument={setSelectedDocument}  setMessages={setMessages} />
-            <MainInteractorInterface selectedDocument={selectedDocument} setSelectedDocument={setSelectedDocument} messages={messages} setMessages={setMessages} />
+            <PastDocumentsList 
+              selectedDocument={selectedDocument} 
+              setSelectedDocument={setSelectedDocument}  
+              setMessages={setMessages}
+              isLoading={isLoading} 
+              documents={documents} 
+              error={error}
+              getDocuments={getDocuments}
+            />
+            <MainInteractorInterface 
+              selectedDocument={selectedDocument} 
+              setSelectedDocument={setSelectedDocument} 
+              messages={messages} 
+              setMessages={setMessages} 
+              getDocuments={getDocuments}
+            />
           </Stack>
+          <Button sx={{ml: 4}} variant="contained" color="error" onClick={handleLogout}>Logout</Button>
         </Box>
       ) : (
         <>
           <Login onLogin={(newToken) => setToken(newToken)} />
           <Typography variant="h6" color="white" mx={"auto"}>Or</Typography>
-
           <Signup onLogin={(newToken) => setToken(newToken)} />
         </>
       )}
-      <Button sx={{ml: 4}} variant="contained" color="error" onClick={handleLogout}>Logout</Button>
     </Stack>
   );
 }

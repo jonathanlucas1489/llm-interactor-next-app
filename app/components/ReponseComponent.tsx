@@ -16,7 +16,7 @@ const ResponseComponent = ({ responseText, isUser }: ResponseProps) => (
     maxWidth="1500px"
   >
     <Typography variant="body1">
-      {!isUser ? "Chat: " : null}{responseText}
+      {!isUser ? "Chat: " : "You: "}{responseText}
     </Typography>
   </Box>
 );

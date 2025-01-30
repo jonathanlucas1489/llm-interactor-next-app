@@ -3,6 +3,7 @@ import { useState } from "react";
 
 interface SignupResponse {
   token: string;
+  userId: string;
 }
 
 export const useSignup = () => {
@@ -37,7 +38,9 @@ export const useSignup = () => {
       }
 
       const data = await loginResponse.json();
-      return { token: data.token };
+
+      return { token: data.token, userId: data.userId };
+
     } catch (err) {
       setError("An error occurred. Please try again later.");
       return null;

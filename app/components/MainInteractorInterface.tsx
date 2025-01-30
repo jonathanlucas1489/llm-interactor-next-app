@@ -15,6 +15,7 @@ interface MainInteractorInterfaceProps {
   setSelectedDocument: (id: string | null) => void;
   messages: { text: string; isUser: boolean }[];
   setMessages: (messages: { text: string; isUser: boolean }[]) => void;
+  getDocuments: () => void;
 }
 
 
@@ -26,7 +27,7 @@ const authenticator = async () => {
   return response.json();
 };
 
-export default function MainInteractorInterface({ selectedDocument, setSelectedDocument, messages, setMessages}: MainInteractorInterfaceProps) {
+export default function MainInteractorInterface({ selectedDocument, setSelectedDocument, messages, setMessages, getDocuments}: MainInteractorInterfaceProps) {
   const { isLoading, uploadDocument } = useUpload();
   const [isCurrentInChat, setIsCurrentInChat ] = useState<boolean>(false);
 
@@ -42,6 +43,7 @@ export default function MainInteractorInterface({ selectedDocument, setSelectedD
     try {
       await uploadDocument(imageUrl, setMessages);
       setIsCurrentInChat(true)
+      getDocuments()
     } catch (e) {
       console.log("Error uploading image", e)
     }
