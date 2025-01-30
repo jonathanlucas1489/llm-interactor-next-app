@@ -29,6 +29,7 @@ export const useAskQuestion = () => {
         { text: backendData.llmResponse || "No text extracted.", isUser: false },
       ]);
     } catch (error) {
+      setError(true)
       console.error("Error:", error);
     } finally {
       setIsLoading(false);
