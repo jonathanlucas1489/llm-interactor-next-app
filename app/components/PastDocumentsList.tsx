@@ -4,10 +4,11 @@
 import { useEffect } from "react";
 import { Box, Typography, List, ListItem, ListItemText } from "@mui/material";
 import Image from "next/image";
+import { DocumentProps } from "../page";
 
 interface PastDocumentsListProps {
-  selectedDocument: string | null;
-  setSelectedDocument: (id: string) => void;
+  selectedDocument: DocumentProps | null;
+  setSelectedDocument: (document: DocumentProps) => void;
   setMessages: (messages: { text: string; isUser: boolean }[]) => void;
   isLoading: boolean;
   documents: any[];
@@ -57,7 +58,7 @@ export default function PastDocumentsList({
               border: selectedDocument === document.id ? "1px solid #00bcd4" : "1px solid white",
             }}
             onClick={() => {
-              setSelectedDocument(document.id);
+              setSelectedDocument({documentUrl: document.imageUrl, selectedDocumentId: document.id, name: document.name});
               const interactions = document.interactions.map((interaction: { content: string; isFromUser: boolean; }) => ({
                 text: interaction.content,
                 isUser: interaction.isFromUser,

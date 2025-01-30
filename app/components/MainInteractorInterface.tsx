@@ -8,10 +8,13 @@ import ResponseComponent from "./ReponseComponent";
 import QuestionForm from "./QuestionForm";
 import { useAskQuestion } from "../hooks/useAskQuestion";
 import { useUpload } from "../hooks/useUpload";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import PdfDocument from "./PdfCreator";
+import { DocumentProps } from "../page";
 
 interface MainInteractorInterfaceProps {
-  selectedDocument: string | null;
-  setSelectedDocument: (id: string | null) => void;
+  selectedDocument: DocumentProps | null;
+  setSelectedDocument: (document: DocumentProps | null) => void;
   messages: { text: string; isUser: boolean }[];
   setMessages: (messages: { text: string; isUser: boolean }[]) => void;
   getDocuments: () => void;
@@ -28,7 +31,7 @@ const authenticator = async () => {
   return response.json();
 };
 
-export default function MainInteractorInterface({ isCurrentInChat, setIsCurrentInChat, selectedDocument, setSelectedDocument, messages, setMessages, getDocuments}: MainInteractorInterfaceProps) {
+export default function MainInteractorInterface({ isCurrentInChat, setIsCurrentInChat, selectedDocument, setSelectedDocument, messages, setMessages, getDocuments }: MainInteractorInterfaceProps) {
   const { isLoading, uploadDocument } = useUpload();
 
   const { askQuestion, isLoading: isLoadingAskQuestion } = useAskQuestion();
@@ -61,7 +64,17 @@ export default function MainInteractorInterface({ isCurrentInChat, setIsCurrentI
 
   return (
     <Stack spacing={4} alignItems="center" bgcolor="black" p={4}>
-      {isCurrentInChat || selectedDocument ? <Button sx={{ml: 4}} variant="contained" color="info" onClick={onResetChat}>New Chat</Button> : null}
+
+      {isCurrentInChat || selectedDocument ? <Button sx={{ ml: 4 }} variant="contained" color="info" onClick={onResetChat}>New Chat</Button> : null}
+      {selectedDocument && (
+        <PDFDownloadLink
+          document={<PdfDocument imageUrl={selectedDocument.documentUrl} messages={messages} />}
+        fileName={`${selectedDocument.selectedDocumentId}.pdf`}
+          style={{ textDecoration: 'none', backgroundColor: 'green', padding: 8, borderRadius: 4 }}
+        >
+          Download PDF on this interaction
+        </PDFDownloadLink>
+      )}
       {!isCurrentInChat && !selectedDocument ? <Box textAlign="center" width="100%" minWidth="1500px">
         <Typography color="white" variant="h6" mb={2}>
           Select and Upload Your Document
@@ -85,8 +98,8 @@ export default function MainInteractorInterface({ isCurrentInChat, setIsCurrentI
           ))}
         </Stack>
       </Box>
-      <Divider sx={{backgroundColor: "gray"}}/>
-      {isLoadingAskQuestion ? <CircularProgress/> : null}
+      <Divider sx={{ backgroundColor: "gray" }} />
+      {isLoadingAskQuestion ? <CircularProgress /> : null}
       {isCurrentInChat ? <QuestionForm onAsk={onAsk} disabled={!(messages.length > 0 && !isLoadingAskQuestion)} /> : null}
     </Stack>
   );

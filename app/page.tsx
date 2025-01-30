@@ -8,17 +8,15 @@ import MainInteractorInterface from "./components/MainInteractorInterface";
 import PastDocumentsList from "./components/PastDocumentsList";
 import { useGetDocuments } from "./hooks/useGetDocuments";
 
-export interface DocumentInteraction {
-  content: string;
-  createdAt: string;
-  documentId: string;
-  id: string;
-  isFromUser: boolean;
+export interface DocumentProps {
+  selectedDocumentId: string;
+  documentUrl: string;
+  name: string;
 }
 
 export default function Home() {
   const [token, setToken] = useState<string | null>(null);
-  const [selectedDocument, setSelectedDocument] = useState<string | null>(null);
+  const [selectedDocument, setSelectedDocument] = useState<DocumentProps | null>(null);
   const [messages, setMessages] = useState<{ text: string; isUser: boolean }[]>([]);
   const [isCurrentInChat, setIsCurrentInChat ] = useState<boolean>(false);
 
