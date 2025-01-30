@@ -9,9 +9,9 @@ const imagekit = new ImageKit({
 
 export async function GET() {
   try {
-    const timestamp = Math.floor(Date.now() / 1000) + 500; 
-    const authParams = imagekit.getAuthenticationParameters(undefined, timestamp);
-    
+    const expire = Math.floor(Date.now() / 1000) + 60;
+
+    const authParams = imagekit.getAuthenticationParameters(undefined, expire); 
     return NextResponse.json(authParams);
   } catch (error) {
     console.error("Error generating ImageKit auth:", error);

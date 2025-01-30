@@ -37,6 +37,7 @@ export default function MainInteractorInterface({ isCurrentInChat, setIsCurrentI
   const { askQuestion, isLoading: isLoadingAskQuestion, error } = useAskQuestion();
 
   const onError = (err: any) => {
+    console.log(err)
     alert("There was an error uploading the file. Please try again.");
   };
 
