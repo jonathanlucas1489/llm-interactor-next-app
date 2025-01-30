@@ -12,6 +12,7 @@ interface PastDocumentsListProps {
   documents: any[];
   error: string | null;
   getDocuments: () => void;
+  setIsCurrentInChat: (isInChat: boolean) => void;
 }
 
 export default function PastDocumentsList({ 
@@ -21,7 +22,8 @@ export default function PastDocumentsList({
   isLoading, 
   documents, 
   error, 
-  getDocuments 
+  getDocuments,
+  setIsCurrentInChat
 }: PastDocumentsListProps) {
   useEffect(() => {
     getDocuments();
@@ -60,6 +62,7 @@ export default function PastDocumentsList({
                 isUser: interaction.isFromUser,
               }));
               setMessages(interactions); 
+              setIsCurrentInChat(true);
               localStorage.setItem("documentId", document.id);
             }}
           >

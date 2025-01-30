@@ -16,6 +16,8 @@ interface MainInteractorInterfaceProps {
   messages: { text: string; isUser: boolean }[];
   setMessages: (messages: { text: string; isUser: boolean }[]) => void;
   getDocuments: () => void;
+  setIsCurrentInChat: (isInChat: boolean) => void;
+  isCurrentInChat: boolean;
 }
 
 
@@ -27,9 +29,8 @@ const authenticator = async () => {
   return response.json();
 };
 
-export default function MainInteractorInterface({ selectedDocument, setSelectedDocument, messages, setMessages, getDocuments}: MainInteractorInterfaceProps) {
+export default function MainInteractorInterface({ isCurrentInChat, setIsCurrentInChat, selectedDocument, setSelectedDocument, messages, setMessages, getDocuments}: MainInteractorInterfaceProps) {
   const { isLoading, uploadDocument } = useUpload();
-  const [isCurrentInChat, setIsCurrentInChat ] = useState<boolean>(false);
 
   const { askQuestion, isLoading: isLoadingAskQuestion } = useAskQuestion();
 

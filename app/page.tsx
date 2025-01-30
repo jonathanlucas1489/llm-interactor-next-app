@@ -20,6 +20,7 @@ export default function Home() {
   const [token, setToken] = useState<string | null>(null);
   const [selectedDocument, setSelectedDocument] = useState<string | null>(null);
   const [messages, setMessages] = useState<{ text: string; isUser: boolean }[]>([]);
+  const [isCurrentInChat, setIsCurrentInChat ] = useState<boolean>(false);
 
   const { isLoading, documents, error, getDocuments } = useGetDocuments();
 
@@ -62,6 +63,7 @@ export default function Home() {
               documents={documents} 
               error={error}
               getDocuments={getDocuments}
+              setIsCurrentInChat={setIsCurrentInChat}
             />
             <MainInteractorInterface 
               selectedDocument={selectedDocument} 
@@ -69,6 +71,8 @@ export default function Home() {
               messages={messages} 
               setMessages={setMessages} 
               getDocuments={getDocuments}
+              isCurrentInChat={isCurrentInChat}
+              setIsCurrentInChat={setIsCurrentInChat}
             />
           </Stack>
           <Button sx={{ml: 4}} variant="contained" color="error" onClick={handleLogout}>Logout</Button>
