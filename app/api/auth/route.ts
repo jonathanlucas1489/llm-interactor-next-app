@@ -12,7 +12,11 @@ export async function GET() {
   try {
     const expire = dayjs().subtract(2, 'hour').unix();
     const authParams = imagekit.getAuthenticationParameters(undefined, expire); 
-    return NextResponse.json(authParams);
+    return NextResponse.json(authParams, {
+      headers: {
+        'Cache-Control': 'no-store', 
+      },
+    });
   } catch (error) {
     console.error("Error generating ImageKit auth:", error);
     return NextResponse.error();
